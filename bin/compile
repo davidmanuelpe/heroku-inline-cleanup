@@ -1,16 +1,12 @@
 #!/bin/sh
-echo "🔥 Running custom inline buildpack cleanup..."
+echo "🔥 Running final slug audit & cleanup"
 
-# Mostra os maiores diretórios antes
-echo "📦 Before cleanup:"
-du -h -d 1 /app | sort -hr | head -n 10
+echo "📦 Top folders before compression:"
+du -h -d 2 /app | sort -hr | head -n 20
 
-# Remove o diretório inflado
-echo "🧹 Removing /app/vendor/bundle..."
-rm -rf /app/vendor/bundle
+# Deleta .bundle agora, já que vendor/bundle não é mais usado
+echo "🧹 Removing /app/.bundle..."
+rm -rf /app/.bundle
 
-# Mostra depois
-echo "✅ After cleanup:"
-du -h -d 1 /app | sort -hr | head -n 10
-
-exit 0
+echo "✅ Done. Top folders after cleanup:"
+du -h -d 2 /app | sort -hr | head -n 20
