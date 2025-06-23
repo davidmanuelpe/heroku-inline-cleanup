@@ -1,0 +1,16 @@
+#!/bin/sh
+echo "🔥 Running custom inline buildpack cleanup..."
+
+# Mostra os maiores diretórios antes
+echo "📦 Before cleanup:"
+du -h -d 1 /app | sort -hr | head -n 10
+
+# Remove o diretório inflado
+echo "🧹 Removing /app/vendor/bundle..."
+rm -rf /app/vendor/bundle
+
+# Mostra depois
+echo "✅ After cleanup:"
+du -h -d 1 /app | sort -hr | head -n 10
+
+exit 0
