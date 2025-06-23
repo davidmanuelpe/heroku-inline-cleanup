@@ -1,12 +1,15 @@
 #!/bin/sh
 echo "🔥 Running final slug audit & cleanup"
 
-echo "📦 Top folders before compression:"
-du -h -d 2 /app | sort -hr | head -n 20
+echo "📦 Top folders before cleanup:"
+du -h -d 2 /app | sort -hr | head -n 15
 
-# Deleta .bundle agora, já que vendor/bundle não é mais usado
-echo "🧹 Removing /app/.bundle..."
+echo "🧹 Removing .bundle and tmp cache..."
 rm -rf /app/.bundle
+rm -rf /tmp/cache
+rm -rf /app/tmp
+rm -rf /app/vendor/assets
+rm -rf /app/public/assets
 
-echo "✅ Done. Top folders after cleanup:"
-du -h -d 2 /app | sort -hr | head -n 20
+echo "✅ After cleanup:"
+du -h -d 2 /app | sort -hr | head -n 15
